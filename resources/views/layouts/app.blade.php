@@ -13,53 +13,54 @@
 <body class="bg-white font-inter antialiased">
 
     {{-- Header --}}
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-100" x-data="{ mobileOpen: false }">
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200" x-data="{ mobileOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 lg:h-20">
+            <div class="flex items-center justify-between h-16">
 
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-2 shrink-0">
-                    <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-black text-sm">CS</span>
-                    </div>
-                    <span class="font-bold text-xl text-gray-900 tracking-tight">CherishStyle</span>
+                <a href="{{ route('home') }}" class="flex items-center shrink-0">
+                    <span class="text-2xl font-black tracking-tight text-gray-900 leading-none">
+                        <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                    </span>
                 </a>
 
                 {{-- Desktop Navigation --}}
                 <nav class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'text-gray-900' : '' }}">Bosh sahifa</a>
-                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'text-gray-900' : '' }}">Erkaklar</a>
-                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'text-gray-900' : '' }}">Ayollar</a>
-                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'text-gray-900' : '' }}">Yangi</a>
-                    <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors font-semibold {{ request()->routeIs('category.sale') ? 'text-red-600' : '' }}">Aksiya</a>
+                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-800 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold text-gray-900' : '' }}">Bosh sahifa</a>
+                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold text-gray-900' : '' }}">Erkaklar</a>
+                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold text-gray-900' : '' }}">Ayollar</a>
+                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold text-gray-900' : '' }}">Yangi kelganlar</a>
+                    <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : '' }}">Chegirmalar</a>
                 </nav>
 
-                {{-- Right icons --}}
-                <div class="flex items-center gap-4">
-                    {{-- Search --}}
-                    <button class="hidden lg:flex p-2 text-gray-500 hover:text-gray-900 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                {{-- Right side --}}
+                <div class="flex items-center gap-3">
+
+                    {{-- Language Switcher --}}
+                    <div class="hidden lg:flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                    </button>
+                        <span class="bg-gray-900 text-white text-xs font-bold px-2 py-0.5 rounded">UZ</span>
+                        <span class="text-sm text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">RU</span>
+                        <span class="text-sm text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">EN</span>
+                    </div>
 
                     {{-- Cart --}}
-                    <a href="{{ route('cart.index') }}" class="relative p-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <a href="{{ route('cart.index') }}" class="relative p-2 text-gray-600 hover:text-gray-900 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                         </svg>
-                        @if($cartCount > 0)
-                            <span class="absolute -top-0.5 -right-0.5 h-4 w-4 bg-gray-900 text-white text-xs rounded-full flex items-center justify-center font-semibold">{{ $cartCount }}</span>
-                        @endif
+                        <span class="absolute -top-0.5 -right-0.5 h-5 w-5 bg-gray-900 text-white text-xs rounded-full flex items-center justify-center font-bold">{{ $cartCount }}</span>
                     </a>
 
                     {{-- Account --}}
                     @auth
-                        <div class="relative" x-data="{ open: false }">
-                            <button @click="open = !open" class="flex items-center gap-2 p-2 text-gray-500 hover:text-gray-900 transition-colors">
-                                <div class="w-7 h-7 bg-gray-900 rounded-full flex items-center justify-center">
-                                    <span class="text-white text-xs font-semibold">{{ substr(auth()->user()->name, 0, 1) }}</span>
-                                </div>
+                        <div class="relative hidden lg:block" x-data="{ open: false }">
+                            <button @click="open = !open" class="flex items-center gap-1.5 p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
                             </button>
                             <div x-show="open" @click.outside="open = false" x-transition
                                 class="absolute right-0 mt-2 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
@@ -93,14 +94,15 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('login') }}" class="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                            Kirish
+                        <a href="{{ route('login') }}" class="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-gray-900 transition-colors p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
                         </a>
                     @endauth
 
                     {{-- Mobile menu button --}}
-                    <button @click="mobileOpen = !mobileOpen" class="lg:hidden p-2 text-gray-500 hover:text-gray-900 transition-colors">
+                    <button @click="mobileOpen = !mobileOpen" class="lg:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors">
                         <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -116,8 +118,8 @@
                 <a href="{{ route('home') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Bosh sahifa</a>
                 <a href="{{ route('category.men') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Erkaklar</a>
                 <a href="{{ route('category.women') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Ayollar</a>
-                <a href="{{ route('category.new') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Yangi</a>
-                <a href="{{ route('category.sale') }}" class="block px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 rounded-lg font-semibold">Aksiya</a>
+                <a href="{{ route('category.new') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Yangi kelganlar</a>
+                <a href="{{ route('category.sale') }}" class="block px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 rounded-lg">Chegirmalar</a>
                 @guest
                     <a href="{{ route('login') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Kirish</a>
                     <a href="{{ route('register') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Ro'yxatdan o'tish</a>
@@ -148,61 +150,47 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-gray-900 text-white mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer class="bg-white border-t border-gray-200 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+
                 {{-- Brand --}}
-                <div class="md:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                            <span class="text-gray-900 font-black text-sm">CS</span>
-                        </div>
-                        <span class="font-bold text-xl">CherishStyle</span>
-                    </div>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Eng yaxshi sneakerlar brendi. Sifat va uslubni birlashtiramiz.
-                    </p>
+                <div>
+                    <a href="{{ route('home') }}" class="inline-flex items-center mb-4">
+                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        </span>
+                    </a>
+                    <p class="text-sm text-gray-500 mt-2">CherishTheStyle - Stilni qadrlaymiz</p>
                 </div>
 
-                {{-- About --}}
+                {{-- Biz haqimizda --}}
                 <div>
-                    <h4 class="font-semibold text-sm uppercase tracking-widest text-gray-400 mb-4">Biz haqimizda</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('about') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Biz haqimizda</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Aloqa</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Savol-javob</a></li>
+                    <h4 class="font-semibold text-sm text-gray-900 mb-4">Biz haqimizda</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('about') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Biz haqimizda</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Aloqa</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Savollar</a></li>
                     </ul>
                 </div>
 
-                {{-- Delivery --}}
+                {{-- Yetkazib berish --}}
                 <div>
-                    <h4 class="font-semibold text-sm uppercase tracking-widest text-gray-400 mb-4">Yetkazib berish</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('order.track') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Buyurtmani kuzatish</a></li>
-                        <li><a href="{{ route('size-guide') }}" class="text-sm text-gray-400 hover:text-white transition-colors">O'lcham jadvali</a></li>
-                    </ul>
-                </div>
-
-                {{-- Categories --}}
-                <div>
-                    <h4 class="font-semibold text-sm uppercase tracking-widest text-gray-400 mb-4">Kategoriyalar</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('category.men') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Erkaklar</a></li>
-                        <li><a href="{{ route('category.women') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Ayollar</a></li>
-                        <li><a href="{{ route('category.new') }}" class="text-sm text-gray-400 hover:text-white transition-colors">Yangi mahsulotlar</a></li>
-                        <li><a href="{{ route('category.sale') }}" class="text-sm text-red-400 hover:text-red-300 transition-colors">Aksiya</a></li>
+                    <h4 class="font-semibold text-sm text-gray-900 mb-4">Yetkazib berish</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">O'lchamlar</a></li>
+                        <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Buyurtmani kuzatish</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Yetkazib berish</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Qaytarish</a></li>
+                        <li><a href="{{ route('account.dashboard') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Akkaunt</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="border-t border-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-                <p class="text-sm text-gray-500">© {{ date('Y') }} CherishStyle. Barcha huquqlar himoyalangan.</p>
-                <div class="flex items-center gap-4">
-                    <span class="text-xs text-gray-600 bg-gray-800 px-2.5 py-1 rounded-full">UZS</span>
-                    <span class="text-xs text-gray-600 bg-gray-800 px-2.5 py-1 rounded-full">UZ</span>
-                </div>
+        <div class="border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
+                <p class="text-sm text-gray-400">© {{ date('Y') }} CherishTheStyle. All rights reserved.</p>
             </div>
         </div>
     </footer>

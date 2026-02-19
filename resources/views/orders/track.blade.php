@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Buyurtmani kuzatish — CherishStyle')
+@section('title', __('app.track_title') . ' — CherishStyle')
 @section('content')
 <div class="max-w-2xl mx-auto px-4 py-12">
 
     <div class="text-center mb-10">
-        <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">Buyurtmani kuzatish</h1>
-        <p class="text-gray-500 text-sm">Buyurtma raqamingizni kiriting</p>
+        <h1 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">{{ __('app.track_title') }}</h1>
+        <p class="text-gray-500 text-sm">{{ __('app.track_subtitle') }}</p>
     </div>
 
     {{-- Search form --}}
@@ -17,7 +17,7 @@
             class="flex-1 px-4 py-3 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent uppercase tracking-widest @error('order_number') border-red-400 bg-red-50 @enderror">
         <button type="submit"
             class="px-5 py-3 bg-gray-900 text-white rounded-xl text-sm font-semibold hover:bg-gray-800 transition-all">
-            Qidirish
+            {{ __('app.track_search') }}
         </button>
     </form>
 
@@ -29,15 +29,14 @@
 
     @isset($order)
     <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden">
-        {{-- Order header --}}
         <div class="bg-gray-50 border-b border-gray-100 p-5 sm:p-6">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <p class="text-xs text-gray-500 font-medium mb-1">Buyurtma raqami</p>
+                    <p class="text-xs text-gray-500 font-medium mb-1">{{ __('app.track_order_num') }}</p>
                     <p class="text-xl font-black text-gray-900 tracking-widest">{{ $order->order_number }}</p>
                 </div>
                 <div class="text-right">
-                    <p class="text-xs text-gray-500 mb-1">Sana</p>
+                    <p class="text-xs text-gray-500 mb-1">{{ __('app.track_date') }}</p>
                     <p class="text-sm font-semibold text-gray-900">{{ $order->created_at->format('d.m.Y H:i') }}</p>
                 </div>
             </div>
@@ -46,7 +45,6 @@
         {{-- Progress timeline --}}
         <div class="p-5 sm:p-6">
             <div class="relative">
-                {{-- Progress line --}}
                 <div class="absolute top-5 left-5 right-5 h-0.5 bg-gray-100">
                     @php
                         $progress = match($order->status) {
@@ -61,10 +59,10 @@
 
                 <div class="relative flex justify-between">
                     @foreach([
-                        ['key' => 'accepted',  'label' => 'Qabul qilindi',   'icon' => 'M5 13l4 4L19 7'],
-                        ['key' => 'packing',   'label' => 'Qadoqlanmoqda',   'icon' => 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'],
-                        ['key' => 'shipping',  'label' => 'Yetkazilmoqda',   'icon' => 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0'],
-                        ['key' => 'delivered', 'label' => 'Yetkazildi',      'icon' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'],
+                        ['key' => 'accepted',  'label_key' => 'track_accepted',  'icon' => 'M5 13l4 4L19 7'],
+                        ['key' => 'packing',   'label_key' => 'track_packing',   'icon' => 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4'],
+                        ['key' => 'shipping',  'label_key' => 'track_shipping',  'icon' => 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0'],
+                        ['key' => 'delivered', 'label_key' => 'track_delivered', 'icon' => 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6'],
                     ] as $index => $step)
                         @php
                             $isDone    = $currentIndex >= $index;
@@ -79,14 +77,13 @@
                                 </svg>
                             </div>
                             <p class="text-xs font-semibold {{ $isDone ? 'text-gray-900' : 'text-gray-400' }} leading-tight">
-                                {{ $step['label'] }}
+                                {{ __('app.' . $step['label_key']) }}
                             </p>
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            {{-- Current status badge --}}
             <div class="mt-8 text-center">
                 @php
                     $statusColors = [
@@ -97,7 +94,7 @@
                     ];
                 @endphp
                 <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold {{ $statusColors[$order->status] ?? 'bg-gray-50 text-gray-700 border-gray-200' }}">
-                    <span class="w-1.5 h-1.5 rounded-full {{ str_replace(['text-', 'bg-'], ['bg-', 'bg-'], explode(' ', $statusColors[$order->status] ?? '')[1] ?? '') }} bg-current"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                     {{ $order->status_label }}
                 </span>
             </div>
@@ -105,7 +102,7 @@
 
         {{-- Order items --}}
         <div class="border-t border-gray-100 p-5 sm:p-6">
-            <h3 class="text-sm font-bold text-gray-900 mb-4">Buyurtma tarkibi</h3>
+            <h3 class="text-sm font-bold text-gray-900 mb-4">{{ __('app.track_items') }}</h3>
             <div class="space-y-3">
                 @foreach($order->items as $item)
                 <div class="flex items-center gap-3">
@@ -121,26 +118,26 @@
                         <p class="text-sm font-medium text-gray-900 line-clamp-1">{{ $item->product_name }}</p>
                         <p class="text-xs text-gray-500">{{ $item->size }} × {{ $item->quantity }}</p>
                     </div>
-                    <p class="text-sm font-semibold text-gray-900">{{ number_format($item->subtotal, 0, '.', ' ') }} so'm</p>
+                    <p class="text-sm font-semibold text-gray-900">{{ number_format($item->subtotal, 0, '.', ' ') }} {{ __('app.currency') }}</p>
                 </div>
                 @endforeach
             </div>
 
             <div class="border-t border-gray-100 mt-4 pt-4 space-y-1.5 text-sm">
                 <div class="flex justify-between text-gray-600">
-                    <span>Yetkazib berish</span>
-                    <span>{{ number_format($order->delivery_price, 0, '.', ' ') }} so'm</span>
+                    <span>{{ __('app.track_delivery') }}</span>
+                    <span>{{ number_format($order->delivery_price, 0, '.', ' ') }} {{ __('app.currency') }}</span>
                 </div>
                 <div class="flex justify-between font-bold text-gray-900">
-                    <span>Jami</span>
-                    <span>{{ number_format($order->total_price, 0, '.', ' ') }} so'm</span>
+                    <span>{{ __('app.track_total') }}</span>
+                    <span>{{ number_format($order->total_price, 0, '.', ' ') }} {{ __('app.currency') }}</span>
                 </div>
             </div>
         </div>
 
         {{-- Delivery address --}}
         <div class="border-t border-gray-100 p-5 sm:p-6 bg-gray-50">
-            <h3 class="text-sm font-bold text-gray-900 mb-3">Yetkazib berish manzili</h3>
+            <h3 class="text-sm font-bold text-gray-900 mb-3">{{ __('app.track_address') }}</h3>
             <p class="text-sm text-gray-700">{{ $order->full_name }}</p>
             <p class="text-sm text-gray-500">{{ $order->phone }}</p>
             <p class="text-sm text-gray-500">{{ $order->city }}, {{ $order->address }}</p>

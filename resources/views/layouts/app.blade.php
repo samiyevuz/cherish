@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,24 +26,28 @@
 
                 {{-- Desktop Navigation --}}
                 <nav class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-800 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold text-gray-900' : '' }}">Bosh sahifa</a>
-                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold text-gray-900' : '' }}">Erkaklar</a>
-                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold text-gray-900' : '' }}">Ayollar</a>
-                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold text-gray-900' : '' }}">Yangi kelganlar</a>
-                    <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : '' }}">Chegirmalar</a>
+                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-800 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_home') }}</a>
+                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_men') }}</a>
+                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_women') }}</a>
+                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_new') }}</a>
+                    <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : '' }}">{{ __('app.nav_sale') }}</a>
                 </nav>
 
                 {{-- Right side --}}
                 <div class="flex items-center gap-3">
 
                     {{-- Language Switcher --}}
+                    @php $currentLocale = app()->getLocale(); @endphp
                     <div class="hidden lg:flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span class="bg-gray-900 text-white text-xs font-bold px-2 py-0.5 rounded">UZ</span>
-                        <span class="text-sm text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">RU</span>
-                        <span class="text-sm text-gray-500 hover:text-gray-900 cursor-pointer transition-colors">EN</span>
+                        <a href="{{ route('locale.switch', 'uz') }}"
+                           class="text-xs font-bold px-2 py-0.5 rounded transition-colors {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900' }}">UZ</a>
+                        <a href="{{ route('locale.switch', 'ru') }}"
+                           class="text-sm transition-colors {{ $currentLocale === 'ru' ? 'font-bold text-gray-900' : 'text-gray-400 hover:text-gray-700' }}">RU</a>
+                        <a href="{{ route('locale.switch', 'en') }}"
+                           class="text-sm transition-colors {{ $currentLocale === 'en' ? 'font-bold text-gray-900' : 'text-gray-400 hover:text-gray-700' }}">EN</a>
                     </div>
 
                     {{-- Cart --}}
@@ -71,23 +75,23 @@
                                 @if(auth()->user()->isAdmin())
                                     <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                        Admin panel
+                                        {{ __('app.nav_admin') }}
                                     </a>
                                 @endif
                                 <a href="{{ route('account.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                                    Kabinetim
+                                    {{ __('app.nav_cabinet') }}
                                 </a>
                                 <a href="{{ route('account.orders') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                                    Buyurtmalarim
+                                    {{ __('app.nav_my_orders') }}
                                 </a>
                                 <div class="border-t border-gray-100 mt-1 pt-1">
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit" class="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                                            Chiqish
+                                            {{ __('app.nav_logout') }}
                                         </button>
                                     </form>
                                 </div>
@@ -115,14 +119,20 @@
 
             {{-- Mobile menu --}}
             <div x-show="mobileOpen" x-transition class="lg:hidden border-t border-gray-100 py-4 space-y-1">
-                <a href="{{ route('home') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Bosh sahifa</a>
-                <a href="{{ route('category.men') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Erkaklar</a>
-                <a href="{{ route('category.women') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Ayollar</a>
-                <a href="{{ route('category.new') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Yangi kelganlar</a>
-                <a href="{{ route('category.sale') }}" class="block px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 rounded-lg">Chegirmalar</a>
+                <a href="{{ route('home') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_home') }}</a>
+                <a href="{{ route('category.men') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_men') }}</a>
+                <a href="{{ route('category.women') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_women') }}</a>
+                <a href="{{ route('category.new') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_new') }}</a>
+                <a href="{{ route('category.sale') }}" class="block px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 rounded-lg">{{ __('app.nav_sale') }}</a>
+                {{-- Mobile locale switcher --}}
+                <div class="flex items-center gap-3 px-4 pt-2 border-t border-gray-100 mt-2">
+                    <a href="{{ route('locale.switch', 'uz') }}" class="text-sm font-semibold {{ $currentLocale === 'uz' ? 'text-gray-900 underline' : 'text-gray-400' }}">UZ</a>
+                    <a href="{{ route('locale.switch', 'ru') }}" class="text-sm font-semibold {{ $currentLocale === 'ru' ? 'text-gray-900 underline' : 'text-gray-400' }}">RU</a>
+                    <a href="{{ route('locale.switch', 'en') }}" class="text-sm font-semibold {{ $currentLocale === 'en' ? 'text-gray-900 underline' : 'text-gray-400' }}">EN</a>
+                </div>
                 @guest
-                    <a href="{{ route('login') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Kirish</a>
-                    <a href="{{ route('register') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">Ro'yxatdan o'tish</a>
+                    <a href="{{ route('login') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_login') }}</a>
+                    <a href="{{ route('register') }}" class="block px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-lg">{{ __('app.nav_register') }}</a>
                 @endguest
             </div>
         </div>
@@ -161,28 +171,28 @@
                             <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
                         </span>
                     </a>
-                    <p class="text-sm text-gray-500 mt-2">CherishTheStyle - Stilni qadrlaymiz</p>
+                    <p class="text-sm text-gray-500 mt-2">{{ __('app.footer_tagline') }}</p>
                 </div>
 
                 {{-- Biz haqimizda --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-4">Biz haqimizda</h4>
+                    <h4 class="font-semibold text-sm text-gray-900 mb-4">{{ __('app.footer_about_col') }}</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('about') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Biz haqimizda</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Aloqa</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">Savollar</a></li>
+                        <li><a href="{{ route('about') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_about') }}</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_contact') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_faq') }}</a></li>
                     </ul>
                 </div>
 
                 {{-- Yetkazib berish --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-4">Yetkazib berish</h4>
+                    <h4 class="font-semibold text-sm text-gray-900 mb-4">{{ __('app.footer_delivery_col') }}</h4>
                     <ul class="space-y-3">
-                        <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">O'lchamlar</a></li>
-                        <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Buyurtmani kuzatish</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Yetkazib berish</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Qaytarish</a></li>
-                        <li><a href="{{ route('account.dashboard') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">Akkaunt</a></li>
+                        <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_sizes') }}</a></li>
+                        <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_track') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_delivery') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_returns') }}</a></li>
+                        <li><a href="{{ route('account.dashboard') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_account') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -190,7 +200,7 @@
 
         <div class="border-t border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
-                <p class="text-sm text-gray-400">© {{ date('Y') }} CherishTheStyle. All rights reserved.</p>
+                <p class="text-sm text-gray-400">{{ __('app.footer_copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>
     </footer>

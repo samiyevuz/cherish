@@ -13,6 +13,14 @@ use App\Http\Controllers\SizeGuideController;
 use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Route;
 
+// ─── Locale Switcher ─────────────────────────────────────────────────────────
+Route::get('/locale/{lang}', function (string $lang) {
+    if (in_array($lang, ['uz', 'ru', 'en'])) {
+        session(['locale' => $lang]);
+    }
+    return redirect()->back()->withInput();
+})->name('locale.switch');
+
 // ─── Auth Routes ─────────────────────────────────────────────────────────────
 require __DIR__ . '/auth.php';
 

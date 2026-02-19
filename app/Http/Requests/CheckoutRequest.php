@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class CheckoutRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return auth()->check();
+    }
+
+    public function rules(): array
+    {
+        return [
+            'full_name' => ['required', 'string', 'max:255'],
+            'phone'     => ['required', 'string', 'max:20'],
+            'city'      => ['required', 'string', 'max:100'],
+            'address'   => ['required', 'string', 'max:500'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'full_name.required' => 'To\'liq ism majburiy.',
+            'phone.required'     => 'Telefon raqam majburiy.',
+            'city.required'      => 'Shahar majburiy.',
+            'address.required'   => 'Manzil majburiy.',
+        ];
+    }
+}

@@ -148,42 +148,50 @@
                 </form>
 
                 {{-- Wishlist button --}}
-                <form action="{{ route('account.wishlist.toggle') }}" method="POST" class="mt-2" 
-                      x-data="{ inWishlist: {{ $inWishlist ? 'true' : 'false' }}, loading: false }"
-                      @submit.prevent="
-                          loading = true;
-                          fetch('{{ route('account.wishlist.toggle') }}', {
-                              method: 'POST',
-                              headers: {
-                                  'Content-Type': 'application/json',
-                                  'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
-                                  'Accept': 'application/json'
-                              },
-                              body: JSON.stringify({ product_id: {{ $product->id }} })
-                          })
-                          .then(response => response.json())
-                          .then(data => {
-                              inWishlist = data.added;
-                              loading = false;
-                          })
-                          .catch(error => {
-                              console.error('Error:', error);
-                              loading = false;
-                              window.location.reload();
-                          });
-                      ">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <button type="submit"
+                @auth
+                <div class="mt-3" 
+                     x-data="{ inWishlist: {{ $inWishlist ? 'true' : 'false' }}, loading: false }">
+                    <button 
+                        @click="
+                            if (loading) return;
+                            loading = true;
+                            fetch('{{ route('account.wishlist.toggle') }}', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({ product_id: {{ $product->id }} })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                inWishlist = data.added;
+                                loading = false;
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                loading = false;
+                                window.location.reload();
+                            });
+                        "
                         :disabled="loading"
-                        :class="inWishlist ? 'bg-red-50 border-red-200 text-red-600' : 'border-gray-200 text-gray-700'"
-                        class="w-full flex items-center justify-center gap-2 border font-medium py-3 px-6 rounded-xl hover:border-gray-400 transition-all text-sm disabled:opacity-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" :fill="inWishlist ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        :class="inWishlist ? 'bg-red-50 border-red-200 text-red-600 hover:bg-red-100' : 'border-gray-200 text-gray-700 hover:bg-gray-50'"
+                        class="w-full flex items-center justify-center gap-2 border font-medium py-3 px-6 rounded-xl transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" :fill="inWishlist ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
-                        <span x-text="inWishlist ? '{{ __('app.product_rm_from_wishlist') }}' : '{{ __('app.product_add_to_wishlist') }}'"></span>
+                        <span x-show="!loading" x-text="inWishlist ? '{{ __('app.product_rm_from_wishlist') }}' : '{{ __('app.product_add_to_wishlist') }}'"></span>
+                        <span x-show="loading" class="flex items-center gap-1">
+                            <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 8 2.627 8 5.859V4.141c0-3.232 2.627-5.859 5.859-5.859H12v8z"></path>
+                            </svg>
+                            <span>Kutilmoqda...</span>
+                        </span>
                     </button>
-                </form>
+                </div>
+                @endauth
                 @else
                     <a href="{{ route('login') }}"
                         class="w-full flex items-center justify-center gap-2 bg-gray-900 text-white font-semibold py-3.5 px-6 rounded-xl hover:bg-gray-800 transition-all text-sm">

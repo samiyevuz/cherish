@@ -4,10 +4,10 @@
 @section('admin_content')
 
 <div class="flex gap-2 mb-5">
-    <form method="GET" class="flex gap-2">
+    <form method="GET" class="flex gap-2 flex-1 min-w-0">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Qidirish..."
-            class="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 w-64">
-        <button type="submit" class="px-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800">Qidirish</button>
+            class="flex-1 min-w-0 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+        <button type="submit" class="shrink-0 px-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors">Qidirish</button>
     </form>
 </div>
 

@@ -4,16 +4,16 @@
 @section('admin_content')
 
 <div class="flex flex-col sm:flex-row gap-3 mb-5">
-    <form method="GET" class="flex gap-2 flex-1">
+    <form method="GET" class="flex gap-2 flex-1 min-w-0">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Buyurtma raqami..."
-            class="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 max-w-xs">
-        <select name="status" class="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+            class="flex-1 min-w-0 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+        <select name="status" class="shrink-0 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
             <option value="">Barcha statuslar</option>
             @foreach(['accepted' => 'Qabul', 'packing' => 'Qadoqlash', 'shipping' => 'Yetkazish', 'delivered' => 'Yetkazildi'] as $val => $label)
                 <option value="{{ $val }}" {{ request('status') === $val ? 'selected' : '' }}>{{ $label }}</option>
             @endforeach
         </select>
-        <button type="submit" class="px-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800">Filter</button>
+        <button type="submit" class="shrink-0 px-4 py-2.5 bg-gray-900 text-white rounded-xl text-sm font-medium hover:bg-gray-800 transition-colors">Filter</button>
     </form>
 </div>
 

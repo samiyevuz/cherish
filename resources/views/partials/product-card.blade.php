@@ -48,12 +48,11 @@
             @endif
         </div>
 
-        {{-- Batafsil button: hover da paydo bo'ladi (homepage) yoki har doim ko'rinadi (category pages) --}}
-        <div class="{{ $showButtonAlways ? '' : 'max-h-0 overflow-hidden group-hover:max-h-16 transition-all duration-300 ease-out' }}">
-            <a href="{{ route('product.show', $product->slug) }}"
-               class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-colors duration-200">
-                {{ __('app.details') }}
-            </a>
-        </div>
+        {{-- Batafsil button: hover da opacity o'zgaradi (layout shift yo'q) --}}
+        <a href="{{ route('product.show', $product->slug) }}"
+           class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-all duration-300 ease-out
+                  {{ $showButtonAlways ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0' }}">
+            {{ __('app.details') }}
+        </a>
     </div>
 </div>

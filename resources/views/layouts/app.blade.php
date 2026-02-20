@@ -176,9 +176,9 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-white border-t border-gray-200 mt-16">
+    <footer class="bg-white border-t border-gray-100 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
 
                 {{-- Brand --}}
                 <div>
@@ -194,35 +194,35 @@
                             </span>
                         @endif
                     </a>
-                    <p class="text-sm text-gray-500 mt-2">{{ __('app.footer_tagline') }}</p>
+                    <p class="text-sm text-gray-600 mt-2">{{ __('app.footer_tagline') }}</p>
                 </div>
 
                 {{-- Biz haqimizda --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-3">{{ __('app.footer_about_col') }}</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('about') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_about') }}</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_contact') }}</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_faq') }}</a></li>
+                    <h4 class="font-bold text-base text-gray-900 mb-4">{{ __('app.footer_about_col') }}</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('about') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">{{ __('app.footer_about') }}</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">{{ __('app.footer_contact') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-gray-600 hover:text-gray-900 transition-colors">{{ __('app.footer_faq') }}</a></li>
                     </ul>
                 </div>
 
                 {{-- Yetkazib berish --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-3">{{ __('app.footer_delivery_col') }}</h4>
-                    <ul class="space-y-2.5">
-                        <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_sizes') }}</a></li>
-                        <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_track') }}</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_delivery') }}</a></li>
-                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_returns') }}</a></li>
-                        <li><a href="{{ route('account.dashboard') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_account') }}</a></li>
+                    <h4 class="font-bold text-base text-gray-900 mb-4">{{ __('app.footer_delivery_col') }}</h4>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-600 transition-colors">{{ __('app.footer_sizes') }}</a></li>
+                        <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-600 transition-colors">{{ __('app.footer_track') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-600 transition-colors">{{ __('app.footer_delivery') }}</a></li>
+                        <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-600 transition-colors">{{ __('app.footer_returns') }}</a></li>
+                        <li><a href="{{ route('account.dashboard') }}" class="text-sm text-blue-500 hover:text-blue-600 transition-colors">{{ __('app.footer_account') }}</a></li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="border-t border-gray-100 mt-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
+        <div class="border-t border-gray-100 mt-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
                 <p class="text-sm text-gray-400">{{ __('app.footer_copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>

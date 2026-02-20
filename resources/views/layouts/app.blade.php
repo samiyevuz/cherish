@@ -15,17 +15,17 @@
     {{-- Header --}}
     <header class="sticky top-0 z-50 bg-white border-b border-gray-100" x-data="{ mobileOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-[68px]">
+            <div class="flex items-center justify-between h-[76px]">
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center shrink-0">
                     @if(file_exists(public_path('images/logo.png')))
-                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="text-4xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
                             <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                         </span>
                     @else
-                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                        <span class="text-4xl font-black tracking-tight text-gray-900 leading-none">
                             <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                         </span>
                     @endif
@@ -50,18 +50,18 @@
 
                     {{-- Language Switcher --}}
                     @php $currentLocale = app()->getLocale(); @endphp
-                    <div class="hidden lg:flex items-center gap-1">
+                    <div class="hidden lg:flex items-center gap-1.5 border border-gray-200 rounded-2xl px-3 py-1.5">
                         {{-- Globe icon --}}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px] text-gray-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[17px] w-[17px] text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <circle cx="12" cy="12" r="9"/>
                             <path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/>
                         </svg>
                         <a href="{{ route('locale.switch', 'uz') }}"
-                           class="text-xs font-bold px-2.5 py-1 rounded-full transition-all {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-800' }}">UZ</a>
+                           class="text-xs font-bold px-2.5 py-0.5 rounded-full transition-all {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-800' }}">UZ</a>
                         <a href="{{ route('locale.switch', 'ru') }}"
-                           class="text-sm font-medium px-1.5 transition-all {{ $currentLocale === 'ru' ? 'bg-gray-900 text-white rounded-full px-2.5 py-1' : 'text-gray-500 hover:text-gray-800' }}">RU</a>
+                           class="text-xs font-medium transition-all {{ $currentLocale === 'ru' ? 'bg-gray-900 text-white px-2.5 py-0.5 rounded-full' : 'text-gray-500 hover:text-gray-800 px-1' }}">RU</a>
                         <a href="{{ route('locale.switch', 'en') }}"
-                           class="text-sm font-medium px-1.5 transition-all {{ $currentLocale === 'en' ? 'bg-gray-900 text-white rounded-full px-2.5 py-1' : 'text-gray-500 hover:text-gray-800' }}">EN</a>
+                           class="text-xs font-medium transition-all {{ $currentLocale === 'en' ? 'bg-gray-900 text-white px-2.5 py-0.5 rounded-full' : 'text-gray-500 hover:text-gray-800 px-1' }}">EN</a>
                     </div>
 
                     {{-- Cart --}}

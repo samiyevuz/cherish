@@ -116,7 +116,8 @@ return [
     'payment_online_note'   => 'After confirming the order you will be redirected to the payment page. The order is accepted after payment.',
     'checkout_confirm'      => 'Confirm Order',
     'checkout_products'     => 'Products',
-    'checkout_delivery'     => 'Delivery',
+    'checkout_delivery'        => 'Delivery',
+    'checkout_delivery_method' => 'Delivery Method',
     'checkout_total'        => 'Total',
 
     // Checkout success

@@ -11,7 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'user_id', 'order_number', 'total_price', 'delivery_price',
-        'full_name', 'phone', 'city', 'address', 'payment_method', 'status',
+        'full_name', 'phone', 'city', 'address', 'payment_method', 'delivery_method', 'status',
     ];
 
     protected $casts = [

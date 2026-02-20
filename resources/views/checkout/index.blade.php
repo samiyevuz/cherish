@@ -19,8 +19,10 @@
         @csrf
         <div class="grid lg:grid-cols-3 gap-8">
 
-            {{-- Delivery form --}}
-            <div class="lg:col-span-2 space-y-6">
+            {{-- Left column --}}
+            <div class="lg:col-span-2 space-y-4">
+
+                {{-- Delivery info --}}
                 <div class="bg-white border border-gray-100 rounded-2xl p-6">
                     <h2 class="text-base font-bold text-gray-900 mb-5">{{ __('app.checkout_delivery_info') }}</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -32,11 +34,8 @@
                                 value="{{ old('full_name', auth()->user()->name) }}"
                                 placeholder="{{ __('app.checkout_name_ph') }}"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all @error('full_name') border-red-400 bg-red-50 @enderror">
-                            @error('full_name')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
+                            @error('full_name')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">
                                 {{ __('app.checkout_phone') }} <span class="text-red-500">*</span>
@@ -45,11 +44,8 @@
                                 value="{{ old('phone', auth()->user()->phone) }}"
                                 placeholder="{{ __('app.checkout_phone_ph') }}"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all @error('phone') border-red-400 bg-red-50 @enderror">
-                            @error('phone')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
+                            @error('phone')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
-
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">
                                 {{ __('app.checkout_city') }} <span class="text-red-500">*</span>
@@ -58,11 +54,8 @@
                                 value="{{ old('city', auth()->user()->city) }}"
                                 placeholder="{{ __('app.checkout_city_ph') }}"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all @error('city') border-red-400 bg-red-50 @enderror">
-                            @error('city')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
+                            @error('city')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
-
                         <div class="sm:col-span-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">
                                 {{ __('app.checkout_address') }} <span class="text-red-500">*</span>
@@ -70,170 +63,147 @@
                             <textarea name="address" rows="3"
                                 placeholder="{{ __('app.checkout_address_ph') }}"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none @error('address') border-red-400 bg-red-50 @enderror">{{ old('address') }}</textarea>
-                            @error('address')
-                                <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
-                            @enderror
+                            @error('address')<p class="mt-1 text-xs text-red-500">{{ $message }}</p>@enderror
                         </div>
                     </div>
                 </div>
 
-                {{-- Payment Method Accordion --}}
-                @php
-                    $paymentLabels = [
-                        'cash'  => __('app.payment_cash_desc'),
-                        'click' => 'Click orqali to\'lov',
-                        'payme' => 'Payme orqali to\'lov',
-                        'uzum'  => 'Uzum Bank orqali to\'lov',
-                    ];
-                    $oldPayment = old('payment_method', 'cash');
-                @endphp
+                {{-- ─── Payment Method Accordion ─────────────────────────────── --}}
                 <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden"
-                     x-data="{ open: {{ $errors->has('payment_method') ? 'true' : 'false' }}, selected: '{{ $oldPayment }}' }">
+                     x-data="{ open: {{ $errors->has('payment_method') ? 'true' : 'true' }}, selected: '{{ old('payment_method', 'cash') }}' }">
 
                     <input type="hidden" name="payment_method" :value="selected">
 
-                    {{-- Accordion Header --}}
+                    {{-- Header --}}
                     <button type="button" @click="open = !open"
                         class="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors text-left">
-                        {{-- Icon --}}
-                        <div class="flex-shrink-0 w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center">
+                        <div class="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
                             </svg>
                         </div>
-                        {{-- Title + current selection --}}
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-bold text-gray-900">{{ __('app.checkout_payment') }}</p>
                             <p class="text-xs text-blue-500 mt-0.5" x-text="
                                 selected === 'cash'  ? '{{ __('app.payment_cash_desc') }}' :
-                                selected === 'click' ? 'Click orqali to\'lov' :
+                                selected === 'click' ? 'CLICK orqali to\'lov' :
                                 selected === 'payme' ? 'Payme orqali to\'lov' :
                                                       'Uzum Bank orqali to\'lov'
                             "></p>
                         </div>
-                        {{-- Chevron --}}
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transition-transform duration-300 shrink-0"
-                             :class="open ? 'rotate-180' : ''"
-                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                             :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
 
-                    {{-- Accordion Body --}}
+                    {{-- Options --}}
                     <div x-show="open" x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 -translate-y-2"
-                         x-transition:enter-end="opacity-100 translate-y-0"
-                         x-transition:leave="transition ease-in duration-150"
-                         x-transition:leave-start="opacity-100 translate-y-0"
-                         x-transition:leave-end="opacity-0 -translate-y-2"
-                         class="border-t border-gray-100">
+                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                         class="border-t border-gray-100 divide-y divide-gray-100 px-4 py-2 space-y-2">
 
                         @error('payment_method')
-                            <p class="mx-5 mt-4 text-xs text-red-500 bg-red-50 border border-red-200 rounded-xl px-4 py-2">{{ $message }}</p>
+                            <p class="py-2 text-xs text-red-500">{{ $message }}</p>
                         @enderror
 
-                        <div class="divide-y divide-gray-100">
+                        @php
+                        $paymentOptions = [
+                            ['value' => 'cash',  'label' => __('app.payment_cash'),      'sub' => __('app.payment_cash_desc')],
+                            ['value' => 'click', 'label' => 'CLICK orqali to\'lov',      'sub' => null],
+                            ['value' => 'payme', 'label' => 'Payme orqali to\'lov',      'sub' => null],
+                            ['value' => 'uzum',  'label' => 'Uzum Bank orqali to\'lov',  'sub' => null],
+                        ];
+                        @endphp
 
-                            {{-- Cash --}}
-                            <label class="flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                                <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
-                                    <div class="w-5 h-5 rounded-full border-2 transition-colors"
-                                         :class="selected === 'cash' ? 'border-blue-500' : 'border-gray-300'"></div>
-                                    <div class="absolute w-2.5 h-2.5 rounded-full bg-blue-500 transition-opacity"
-                                         :class="selected === 'cash' ? 'opacity-100' : 'opacity-0'"></div>
-                                </div>
-                                <input type="radio" name="_payment_method_radio" value="cash" class="sr-only" @change="selected = 'cash'" :checked="selected === 'cash'">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-semibold text-gray-900">{{ __('app.payment_cash') }}</p>
-                                    <p class="text-xs text-gray-400 mt-0.5">{{ __('app.payment_cash_desc') }}</p>
-                                </div>
-                                <div class="w-8 h-8 rounded-lg bg-orange-50 flex items-center justify-center shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                    </svg>
-                                </div>
-                            </label>
-
-                            {{-- Click --}}
-                            <label class="flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                                <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
-                                    <div class="w-5 h-5 rounded-full border-2 transition-colors"
-                                         :class="selected === 'click' ? 'border-blue-500' : 'border-gray-300'"></div>
-                                    <div class="absolute w-2.5 h-2.5 rounded-full bg-blue-500 transition-opacity"
-                                         :class="selected === 'click' ? 'opacity-100' : 'opacity-0'"></div>
-                                </div>
-                                <input type="radio" name="_payment_method_radio" value="click" class="sr-only" @change="selected = 'click'" :checked="selected === 'click'">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-semibold text-gray-900">Click</p>
-                                    <p class="text-xs text-gray-400 mt-0.5">{{ __('app.payment_online_desc') }}</p>
-                                </div>
-                                <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                                    </svg>
-                                </div>
-                            </label>
-
-                            {{-- Payme --}}
-                            <label class="flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                                <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
-                                    <div class="w-5 h-5 rounded-full border-2 transition-colors"
-                                         :class="selected === 'payme' ? 'border-blue-500' : 'border-gray-300'"></div>
-                                    <div class="absolute w-2.5 h-2.5 rounded-full bg-blue-500 transition-opacity"
-                                         :class="selected === 'payme' ? 'opacity-100' : 'opacity-0'"></div>
-                                </div>
-                                <input type="radio" name="_payment_method_radio" value="payme" class="sr-only" @change="selected = 'payme'" :checked="selected === 'payme'">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-semibold text-gray-900">Payme</p>
-                                    <p class="text-xs text-gray-400 mt-0.5">{{ __('app.payment_online_desc') }}</p>
-                                </div>
-                                <div class="w-8 h-8 rounded-lg bg-teal-50 flex items-center justify-center shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-                                    </svg>
-                                </div>
-                            </label>
-
-                            {{-- Uzum --}}
-                            <label class="flex items-center gap-4 px-5 py-4 cursor-pointer hover:bg-gray-50 transition-colors">
-                                <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
-                                    <div class="w-5 h-5 rounded-full border-2 transition-colors"
-                                         :class="selected === 'uzum' ? 'border-blue-500' : 'border-gray-300'"></div>
-                                    <div class="absolute w-2.5 h-2.5 rounded-full bg-blue-500 transition-opacity"
-                                         :class="selected === 'uzum' ? 'opacity-100' : 'opacity-0'"></div>
-                                </div>
-                                <input type="radio" name="_payment_method_radio" value="uzum" class="sr-only" @change="selected = 'uzum'" :checked="selected === 'uzum'">
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-semibold text-gray-900">Uzum Bank</p>
-                                    <p class="text-xs text-gray-400 mt-0.5">{{ __('app.payment_online_desc') }}</p>
-                                </div>
-                                <div class="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center shrink-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
-                                    </svg>
-                                </div>
-                            </label>
-
-                        </div>
-
-                        {{-- Note based on selection --}}
-                        <div class="px-5 pb-4 pt-1">
-                            <div x-show="selected === 'cash'" x-transition
-                                 class="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                <p class="text-xs text-amber-700">{{ __('app.payment_cash_note') }}</p>
+                        @foreach($paymentOptions as $opt)
+                        <label @click="selected = '{{ $opt['value'] }}'"
+                            :class="selected === '{{ $opt['value'] }}' ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white hover:bg-gray-50'"
+                            class="flex items-center gap-4 px-4 py-3.5 border rounded-xl cursor-pointer transition-all duration-200">
+                            {{-- Radio circle --}}
+                            <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
+                                <div class="w-5 h-5 rounded-full border-2 transition-colors duration-200"
+                                     :class="selected === '{{ $opt['value'] }}' ? 'border-red-500' : 'border-gray-300'"></div>
+                                <div class="absolute w-2.5 h-2.5 rounded-full bg-red-500 transition-all duration-200"
+                                     :class="selected === '{{ $opt['value'] }}' ? 'opacity-100 scale-100' : 'opacity-0 scale-0'"></div>
                             </div>
-                            <div x-show="selected !== 'cash'" x-transition
-                                 class="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-xl px-4 py-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                <p class="text-xs text-blue-700">{{ __('app.payment_online_note') }}</p>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-semibold text-gray-900">{{ $opt['label'] }}</p>
+                                @if($opt['sub'])
+                                    <p class="text-xs text-gray-400 mt-0.5">{{ $opt['sub'] }}</p>
+                                @endif
                             </div>
-                        </div>
+                        </label>
+                        @endforeach
+
                     </div>
                 </div>
-            </div>
 
-            {{-- Order summary --}}
+                {{-- ─── Delivery Method Accordion ────────────────────────────── --}}
+                <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden"
+                     x-data="{ open: true, selected: '{{ old('delivery_method', 'btc') }}' }">
+
+                    <input type="hidden" name="delivery_method" :value="selected">
+
+                    {{-- Header --}}
+                    <button type="button" @click="open = !open"
+                        class="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-50 transition-colors text-left">
+                        <div class="w-9 h-9 rounded-xl bg-gray-100 flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm font-bold text-gray-900">{{ __('app.checkout_delivery_method') }}</p>
+                            <p class="text-xs text-blue-500 mt-0.5" x-text="
+                                selected === 'btc'   ? 'BTC yetkazib berish' : 'FARGO yetkazib berish'
+                            "></p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 transition-transform duration-300 shrink-0"
+                             :class="open ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+
+                    {{-- Options --}}
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                         class="border-t border-gray-100 px-4 py-2 space-y-2">
+
+                        @error('delivery_method')
+                            <p class="py-2 text-xs text-red-500">{{ $message }}</p>
+                        @enderror
+
+                        @php
+                        $deliveryOptions = [
+                            ['value' => 'btc',   'label' => 'BTC yetkazib berish',   'price' => 30000],
+                            ['value' => 'fargo', 'label' => 'FARGO yetkazib berish', 'price' => 30000],
+                        ];
+                        @endphp
+
+                        @foreach($deliveryOptions as $opt)
+                        <label @click="selected = '{{ $opt['value'] }}'"
+                            :class="selected === '{{ $opt['value'] }}' ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-white hover:bg-gray-50'"
+                            class="flex items-center gap-4 px-4 py-3.5 border rounded-xl cursor-pointer transition-all duration-200">
+                            {{-- Radio circle --}}
+                            <div class="relative flex items-center justify-center w-5 h-5 shrink-0">
+                                <div class="w-5 h-5 rounded-full border-2 transition-colors duration-200"
+                                     :class="selected === '{{ $opt['value'] }}' ? 'border-red-500' : 'border-gray-300'"></div>
+                                <div class="absolute w-2.5 h-2.5 rounded-full bg-red-500 transition-all duration-200"
+                                     :class="selected === '{{ $opt['value'] }}' ? 'opacity-100 scale-100' : 'opacity-0 scale-0'"></div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-semibold text-gray-900">{{ $opt['label'] }}</p>
+                                <p class="text-xs text-gray-400 mt-0.5">{{ number_format($opt['price'], 0, '.', ' ') }} so'm</p>
+                            </div>
+                        </label>
+                        @endforeach
+
+                    </div>
+                </div>
+
+            </div>{{-- /left column --}}
+
+            {{-- ─── Order summary ────────────────────────────────────────── --}}
             <div class="lg:col-span-1">
                 <div class="bg-white border border-gray-100 rounded-2xl p-6 sticky top-24">
                     <h2 class="text-base font-bold text-gray-900 mb-5">{{ __('app.cart_summary') }}</h2>
@@ -274,6 +244,7 @@
                     </button>
                 </div>
             </div>
+
         </div>
     </form>
 </div>

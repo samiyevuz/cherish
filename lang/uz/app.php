@@ -116,7 +116,8 @@ return [
     'payment_online_note'   => "Buyurtmani tasdiqlagach siz to'lov sahifasiga yo'naltirilasiz. To'lovdan so'ng buyurtma qabul qilinadi.",
     'checkout_confirm'      => 'Buyurtmani tasdiqlash',
     'checkout_products'     => 'Mahsulotlar',
-    'checkout_delivery'     => 'Yetkazib berish',
+    'checkout_delivery'        => 'Yetkazib berish',
+    'checkout_delivery_method' => 'Yetkazish usuli',
     'checkout_total'        => 'Jami',
 
     // Checkout success

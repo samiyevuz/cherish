@@ -116,7 +116,8 @@ return [
     'payment_online_note'   => 'После подтверждения заказа вы будете перенаправлены на страницу оплаты. Заказ принимается после оплаты.',
     'checkout_confirm'      => 'Подтвердить заказ',
     'checkout_products'     => 'Товары',
-    'checkout_delivery'     => 'Доставка',
+    'checkout_delivery'        => 'Доставка',
+    'checkout_delivery_method' => 'Способ доставки',
     'checkout_total'        => 'Итого',
 
     // Checkout success

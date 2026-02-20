@@ -14,11 +14,12 @@ class CheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name'      => ['required', 'string', 'max:255'],
-            'phone'          => ['required', 'string', 'max:20'],
-            'city'           => ['required', 'string', 'max:100'],
-            'address'        => ['required', 'string', 'max:500'],
-            'payment_method' => ['required', 'string', 'in:cash,click,payme,uzum'],
+            'full_name'       => ['required', 'string', 'max:255'],
+            'phone'           => ['required', 'string', 'max:20'],
+            'city'            => ['required', 'string', 'max:100'],
+            'address'         => ['required', 'string', 'max:500'],
+            'payment_method'  => ['required', 'string', 'in:cash,click,payme,uzum'],
+            'delivery_method' => ['required', 'string', 'in:btc,fargo'],
         ];
     }
 
@@ -29,8 +30,10 @@ class CheckoutRequest extends FormRequest
             'phone.required'          => 'Telefon raqam majburiy.',
             'city.required'           => 'Shahar majburiy.',
             'address.required'        => 'Manzil majburiy.',
-            'payment_method.required' => 'To\'lov usulini tanlang.',
-            'payment_method.in'       => 'Noto\'g\'ri to\'lov usuli.',
+            'payment_method.required'  => 'To\'lov usulini tanlang.',
+            'payment_method.in'        => 'Noto\'g\'ri to\'lov usuli.',
+            'delivery_method.required' => 'Yetkazish usulini tanlang.',
+            'delivery_method.in'       => 'Noto\'g\'ri yetkazish usuli.',
         ];
     }
 }

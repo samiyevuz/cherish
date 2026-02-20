@@ -47,8 +47,9 @@ class CheckoutController extends Controller
                 'phone'          => $request->phone,
                 'city'           => $request->city,
                 'address'        => $request->address,
-                'payment_method' => $request->payment_method,
-                'status'         => 'accepted',
+                'payment_method'  => $request->payment_method,
+                'delivery_method' => $request->delivery_method,
+                'status'          => 'accepted',
             ]);
 
             foreach ($cart->items as $item) {

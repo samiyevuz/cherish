@@ -1,5 +1,9 @@
 @php
     $showButtonAlways = $showButtonAlways ?? false;
+    $inWishlist = false;
+    if (auth()->check()) {
+        $inWishlist = auth()->user()->wishlists()->where('product_id', $product->id)->exists();
+    }
 @endphp
 <div class="group relative bg-white transition-all duration-300 ease-out hover:-translate-y-1">
 
@@ -26,6 +30,43 @@
             @endif
         </div>
 
+        {{-- Wishlist button (top-right) --}}
+        @auth
+        <div class="absolute top-3 right-3 z-20" 
+             x-data="{ inWishlist: {{ $inWishlist ? 'true' : 'false' }}, loading: false }">
+            <button 
+                @click.prevent="
+                    if (loading) return;
+                    loading = true;
+                    fetch('{{ route('account.wishlist.toggle') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ product_id: {{ $product->id }} })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        inWishlist = data.added;
+                        loading = false;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        loading = false;
+                    });
+                "
+                :disabled="loading"
+                :class="inWishlist ? 'bg-red-500 text-white' : 'bg-white/90 text-gray-700 hover:bg-white'"
+                class="p-2 rounded-full shadow-md transition-all duration-200 disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" :fill="inWishlist ? 'currentColor' : 'none'" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+            </button>
+        </div>
+        @endauth
+
         {{-- Out of stock --}}
         @if($product->total_stock === 0)
             <div class="absolute inset-0 bg-white/60 flex items-center justify-center z-20 pointer-events-none">
@@ -48,10 +89,9 @@
             @endif
         </div>
 
-        {{-- Batafsil button: hover da opacity o'zgaradi (layout shift yo'q) --}}
+        {{-- Batafsil button: har doim ko'rinadi --}}
         <a href="{{ route('product.show', $product->slug) }}"
-           class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-all duration-300 ease-out
-                  {{ $showButtonAlways ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0' }}">
+           class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-all duration-300 ease-out opacity-100">
             {{ __('app.details') }}
         </a>
     </div>

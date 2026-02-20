@@ -5,7 +5,7 @@
 @section('content')
 
 {{-- Hero Section --}}
-<section class="bg-gray-100 py-20 lg:py-32">
+<section class="bg-gray-100 py-24 lg:py-36">
     <div class="max-w-3xl mx-auto px-4 text-center">
         <h1 class="text-5xl sm:text-6xl lg:text-7xl font-light text-gray-900 tracking-tight leading-tight mb-6">
             {{ __('app.home_hero_title') }}
@@ -33,9 +33,9 @@
 </section>
 
 {{-- Recommended Products (Tavsiya etilgan) --}}
-<section class="py-12 bg-white">
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center justify-between mb-10">
             <h2 class="text-xl font-semibold text-gray-900">{{ __('app.home_featured') }}</h2>
             <a href="{{ route('category.men') }}" class="text-sm text-gray-900 hover:text-gray-700 transition-colors flex items-center gap-1">
                 {{ __('app.home_view_all') }}
@@ -59,7 +59,7 @@
 </section>
 
 {{-- Categories Banner --}}
-<section class="py-6 bg-white">
+<section class="py-10 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             <a href="{{ route('category.men') }}" class="group relative overflow-hidden bg-gray-900 h-64 md:h-80 flex items-center justify-center">

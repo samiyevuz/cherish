@@ -13,64 +13,73 @@
 <body class="bg-white font-inter antialiased">
 
     {{-- Header --}}
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-200" x-data="{ mobileOpen: false }">
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100" x-data="{ mobileOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-[68px]">
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center shrink-0">
                     @if(file_exists(public_path('images/logo.png')))
-                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-9 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <span class="text-2xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
-                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                            <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                         </span>
                     @else
-                        <span class="text-2xl font-black tracking-tight text-gray-900 leading-none">
-                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                            <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                         </span>
                     @endif
                 </a>
 
                 {{-- Desktop Navigation --}}
-                <nav class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold' : '' }}">{{ __('app.nav_home') }}</a>
-                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold' : '' }}">{{ __('app.nav_men') }}</a>
-                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold' : '' }}">{{ __('app.nav_women') }}</a>
-                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold' : '' }}">{{ __('app.nav_new') }}</a>
-                    <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : '' }}">{{ __('app.nav_sale') }}</a>
+                <nav class="hidden lg:flex items-center gap-9">
+                    <a href="{{ route('home') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold text-gray-900' : 'font-normal' }}">{{ __('app.nav_home') }}</a>
+                    <a href="{{ route('category.men') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold text-gray-900' : 'font-normal' }}">{{ __('app.nav_men') }}</a>
+                    <a href="{{ route('category.women') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold text-gray-900' : 'font-normal' }}">{{ __('app.nav_women') }}</a>
+                    <a href="{{ route('category.new') }}"
+                       class="text-sm text-gray-700 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold text-gray-900' : 'font-normal' }}">{{ __('app.nav_new') }}</a>
+                    <a href="{{ route('category.sale') }}"
+                       class="text-sm text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : 'font-normal' }}">{{ __('app.nav_sale') }}</a>
                 </nav>
 
                 {{-- Right side --}}
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
 
                     {{-- Language Switcher --}}
                     @php $currentLocale = app()->getLocale(); @endphp
-                    <div class="hidden lg:flex items-center gap-2 bg-gray-100 rounded-lg px-2 py-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    <div class="hidden lg:flex items-center gap-1">
+                        {{-- Globe icon --}}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[18px] w-[18px] text-gray-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/>
                         </svg>
                         <a href="{{ route('locale.switch', 'uz') }}"
-                           class="text-xs font-bold px-2.5 py-1 rounded-full transition-colors {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900' }}">UZ</a>
+                           class="text-xs font-bold px-2.5 py-1 rounded-full transition-all {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-800' }}">UZ</a>
                         <a href="{{ route('locale.switch', 'ru') }}"
-                           class="text-sm transition-colors {{ $currentLocale === 'ru' ? 'font-bold text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">RU</a>
+                           class="text-sm font-medium px-1.5 transition-all {{ $currentLocale === 'ru' ? 'bg-gray-900 text-white rounded-full px-2.5 py-1' : 'text-gray-500 hover:text-gray-800' }}">RU</a>
                         <a href="{{ route('locale.switch', 'en') }}"
-                           class="text-sm transition-colors {{ $currentLocale === 'en' ? 'font-bold text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">EN</a>
+                           class="text-sm font-medium px-1.5 transition-all {{ $currentLocale === 'en' ? 'bg-gray-900 text-white rounded-full px-2.5 py-1' : 'text-gray-500 hover:text-gray-800' }}">EN</a>
                     </div>
 
                     {{-- Cart --}}
                     <a href="{{ route('cart.index') }}" class="relative p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                         </svg>
-                        <span class="absolute -top-0.5 -right-0.5 h-5 w-5 bg-gray-900 text-white text-xs rounded-full flex items-center justify-center font-bold">{{ $cartCount }}</span>
+                        @if($cartCount > 0)
+                        <span class="absolute top-0 right-0 h-[18px] w-[18px] bg-gray-900 text-white text-[10px] rounded-full flex items-center justify-center font-bold leading-none">{{ $cartCount }}</span>
+                        @endif
                     </a>
 
                     {{-- Account --}}
                     @auth
                         <div class="relative hidden lg:block" x-data="{ open: false }">
-                            <button @click="open = !open" class="flex items-center gap-1.5 p-2 text-gray-600 hover:text-gray-900 transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            <button @click="open = !open" class="flex items-center p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
                             </button>
                             <div x-show="open" @click.outside="open = false" x-transition
@@ -105,9 +114,9 @@
                             </div>
                         </div>
                     @else
-                        <a href="{{ route('login') }}" class="hidden lg:flex items-center gap-1.5 text-gray-600 hover:text-gray-900 transition-colors p-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        <a href="{{ route('login') }}" class="hidden lg:flex items-center p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-[22px] w-[22px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </a>
                     @endauth

@@ -5,26 +5,26 @@
 @section('content')
 
 {{-- Hero Section --}}
-<section class="bg-gray-100 py-32 lg:py-48 xl:py-56">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-        <h1 class="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-light text-gray-900 tracking-tight leading-tight mb-8">
+<section class="bg-gray-100 py-28 lg:py-40 xl:py-48">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-gray-900 tracking-tight leading-tight mb-7">
             {{ __('app.home_hero_title') }}
         </h1>
-        <p class="text-lg sm:text-xl text-gray-500 mb-12">
+        <p class="text-base sm:text-lg text-gray-500 mb-10">
             {{ __('app.home_hero_sub') }}
         </p>
         <div class="flex flex-wrap items-center justify-center gap-4">
             <a href="{{ route('category.men') }}"
-                class="inline-flex items-center gap-2 bg-gray-900 text-white font-medium text-base px-10 py-4 rounded-sm hover:bg-gray-800 transition-colors">
+                class="inline-flex items-center gap-2 bg-gray-900 text-white font-medium text-sm px-8 py-3.5 rounded-sm hover:bg-gray-800 transition-colors">
                 {{ __('app.home_men_btn') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
             </a>
             <a href="{{ route('category.women') }}"
-                class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium text-base px-10 py-4 rounded-sm hover:bg-gray-50 transition-colors">
+                class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 font-medium text-sm px-8 py-3.5 rounded-sm hover:bg-gray-50 transition-colors">
                 {{ __('app.home_women_btn') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
             </a>

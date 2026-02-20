@@ -167,31 +167,31 @@
     </main>
 
     {{-- Footer --}}
-    <footer class="bg-white border-t border-gray-200 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer class="bg-white border-t border-gray-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
                 {{-- Brand --}}
                 <div>
-                <a href="{{ route('home') }}" class="inline-flex items-center mb-4">
-                    @if(file_exists(public_path('images/logo.png')))
-                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
-                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
-                        </span>
-                    @else
-                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
-                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
-                        </span>
-                    @endif
-                </a>
+                    <a href="{{ route('home') }}" class="inline-flex items-center mb-3">
+                        @if(file_exists(public_path('images/logo.png')))
+                            <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                            <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                                <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                            </span>
+                        @else
+                            <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                                <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                            </span>
+                        @endif
+                    </a>
                     <p class="text-sm text-gray-500 mt-2">{{ __('app.footer_tagline') }}</p>
                 </div>
 
                 {{-- Biz haqimizda --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-4">{{ __('app.footer_about_col') }}</h4>
-                    <ul class="space-y-3">
+                    <h4 class="font-semibold text-sm text-gray-900 mb-3">{{ __('app.footer_about_col') }}</h4>
+                    <ul class="space-y-2.5">
                         <li><a href="{{ route('about') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_about') }}</a></li>
                         <li><a href="{{ route('contact') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_contact') }}</a></li>
                         <li><a href="{{ route('faq') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors">{{ __('app.footer_faq') }}</a></li>
@@ -200,8 +200,8 @@
 
                 {{-- Yetkazib berish --}}
                 <div>
-                    <h4 class="font-semibold text-sm text-gray-900 mb-4">{{ __('app.footer_delivery_col') }}</h4>
-                    <ul class="space-y-3">
+                    <h4 class="font-semibold text-sm text-gray-900 mb-3">{{ __('app.footer_delivery_col') }}</h4>
+                    <ul class="space-y-2.5">
                         <li><a href="{{ route('size-guide') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_sizes') }}</a></li>
                         <li><a href="{{ route('order.track') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_track') }}</a></li>
                         <li><a href="{{ route('faq') }}" class="text-sm text-blue-500 hover:text-blue-700 transition-colors">{{ __('app.footer_delivery') }}</a></li>
@@ -212,8 +212,8 @@
             </div>
         </div>
 
-        <div class="border-t border-gray-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 text-center">
+        <div class="border-t border-gray-100 mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
                 <p class="text-sm text-gray-400">{{ __('app.footer_copyright', ['year' => date('Y')]) }}</p>
             </div>
         </div>

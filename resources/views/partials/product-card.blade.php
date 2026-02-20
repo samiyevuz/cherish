@@ -89,9 +89,10 @@
             @endif
         </div>
 
-        {{-- Batafsil button: har doim ko'rinadi --}}
+        {{-- Batafsil button: mobile'da har doim ko'rinadi, desktop'da hover qilinganda --}}
         <a href="{{ route('product.show', $product->slug) }}"
-           class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-all duration-300 ease-out opacity-100">
+           class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-700 transition-all duration-300 ease-out 
+                  opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-1 lg:group-hover:translate-y-0">
             {{ __('app.details') }}
         </a>
     </div>

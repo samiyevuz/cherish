@@ -15,6 +15,14 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
+        // Agar featured mahsulotlar bo'lmasa, boshqa mahsulotlarni ko'rsatamiz
+        if ($featuredProducts->isEmpty()) {
+            $featuredProducts = Product::with(['primaryImage', 'images', 'sizes'])
+                ->latest()
+                ->take(4)
+                ->get();
+        }
+
         $newProducts = Product::with(['primaryImage', 'images', 'sizes'])
             ->where('is_new', true)
             ->latest()

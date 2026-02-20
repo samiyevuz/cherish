@@ -183,8 +183,8 @@
                 {{-- Brand --}}
                 <div>
                     <a href="{{ route('home') }}" class="inline-flex items-center mb-3">
-                        @if(file_exists(public_path('images/logo.png')))
-                            <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        @if(file_exists(public_path('images/logo.svg')))
+                            <img src="{{ asset('images/logo.svg') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                             <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
                                 <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
                             </span>

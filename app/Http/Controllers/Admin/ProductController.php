@@ -67,6 +67,7 @@ class ProductController extends Controller
                         'product_id' => $product->id,
                         'size'       => $sizeData['size'],
                         'stock'      => $sizeData['stock'] ?? 0,
+                        'price'      => !empty($sizeData['price']) ? $sizeData['price'] : null,
                     ]);
                 }
             }
@@ -112,6 +113,7 @@ class ProductController extends Controller
                         'product_id' => $product->id,
                         'size'       => $sizeData['size'],
                         'stock'      => $sizeData['stock'] ?? 0,
+                        'price'      => !empty($sizeData['price']) ? $sizeData['price'] : null,
                     ]);
                 }
             }

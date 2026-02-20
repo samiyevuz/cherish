@@ -59,7 +59,7 @@ class CheckoutController extends Controller
                     'product_name' => $item->product->name,
                     'size'         => $item->size,
                     'quantity'     => $item->quantity,
-                    'price'        => $item->product->current_price,
+                    'price'        => $item->unit_price,
                 ]);
 
                 // Reduce stock

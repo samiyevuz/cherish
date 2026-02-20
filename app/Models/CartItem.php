@@ -21,8 +21,24 @@ class CartItem extends Model
         return $this->belongsTo(Product::class)->with('images');
     }
 
-    public function getSubtotalAttribute()
+    /**
+     * Effective unit price: size-specific price if set, otherwise product's current_price.
+     */
+    public function getUnitPriceAttribute(): float
     {
-        return $this->product->current_price * $this->quantity;
+        $sizeModel = ProductSize::where('product_id', $this->product_id)
+            ->where('size', $this->size)
+            ->first();
+
+        if ($sizeModel && $sizeModel->price) {
+            return (float) $sizeModel->price;
+        }
+
+        return (float) $this->product->current_price;
+    }
+
+    public function getSubtotalAttribute(): float
+    {
+        return $this->unit_price * $this->quantity;
     }
 }

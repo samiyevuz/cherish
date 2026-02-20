@@ -3,14 +3,32 @@
 @section('title', $product->name . ' — CherishStyle')
 
 @section('content')
+@php
+    $sizePrices = $product->sizes->mapWithKeys(fn($s) => [
+        $s->size => $s->price ? (float)$s->price : null
+    ])->toJson();
+    $basePrice    = $product->sale_price ? (float)$product->sale_price : (float)$product->price;
+    $basePriceFmt = number_format($basePrice, 0, '.', ' ');
+    $hasSalePrice = (bool)$product->sale_price;
+    $origPrice    = number_format((float)$product->price, 0, '.', ' ');
+@endphp
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" x-data="{
     selectedSize: null,
     quantity: 1,
     activeImage: '{{ $product->primary_image_url }}',
     canAddToCart: false,
+    sizePrices: {{ $sizePrices }},
+    basePrice: {{ $basePrice }},
+    displayPrice: {{ $basePrice }},
+    hasSalePrice: {{ $hasSalePrice ? 'true' : 'false' }},
+    formatPrice(n) {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    },
     selectSize(size) {
         this.selectedSize = size;
         this.canAddToCart = true;
+        const sp = this.sizePrices[size];
+        this.displayPrice = sp !== null && sp !== undefined ? sp : this.basePrice;
     }
 }">
 
@@ -65,14 +83,18 @@
 
             <h1 class="text-2xl sm:text-3xl font-black text-gray-900 leading-tight">{{ $product->name }}</h1>
 
-            {{-- Price --}}
+            {{-- Price (dynamic on size select) --}}
             <div class="flex items-center gap-3">
+                <span class="text-3xl font-black text-gray-900" x-text="formatPrice(displayPrice) + ' so\'m'"></span>
                 @if($product->sale_price)
-                    <span class="text-3xl font-black text-gray-900">{{ number_format($product->sale_price, 0, '.', ' ') }} <span class="text-lg font-semibold text-gray-500">{{ __('app.currency') }}</span></span>
-                    <span class="text-lg text-gray-400 line-through">{{ number_format($product->price, 0, '.', ' ') }} {{ __('app.currency') }}</span>
-                @else
-                    <span class="text-3xl font-black text-gray-900">{{ number_format($product->price, 0, '.', ' ') }} <span class="text-lg font-semibold text-gray-500">{{ __('app.currency') }}</span></span>
+                    <span class="text-lg text-gray-400 line-through" x-show="displayPrice == basePrice">{{ $origPrice }} so'm</span>
                 @endif
+                {{-- Size-specific price badge --}}
+                <span x-show="selectedSize && sizePrices[selectedSize] !== null && sizePrices[selectedSize] !== undefined"
+                      x-transition
+                      class="text-xs font-semibold bg-violet-100 text-violet-700 px-2.5 py-1 rounded-full">
+                    O'lchamga narx
+                </span>
             </div>
 
             <div class="border-t border-gray-100 pt-5">
@@ -96,8 +118,11 @@
                                 <button
                                     @click="selectSize('{{ $size->size }}')"
                                     :class="selectedSize === '{{ $size->size }}' ? 'border-gray-900 bg-gray-900 text-white' : 'border-gray-200 text-gray-700 hover:border-gray-900'"
-                                    class="w-12 h-12 rounded-xl border-2 text-sm font-semibold transition-all">
-                                    {{ $size->size }}
+                                    class="relative w-12 h-12 rounded-xl border-2 text-sm font-semibold transition-all flex flex-col items-center justify-center gap-0">
+                                    <span>{{ $size->size }}</span>
+                                    @if($size->price)
+                                        <span class="absolute -top-1.5 -right-1.5 w-2 h-2 rounded-full bg-violet-500"></span>
+                                    @endif
                                 </button>
                             @else
                                 <button disabled class="w-12 h-12 rounded-xl border-2 border-gray-100 text-sm font-semibold text-gray-300 relative overflow-hidden cursor-not-allowed">

@@ -74,29 +74,38 @@
         </div>
 
         {{-- Sizes --}}
-        <div class="bg-white border border-gray-100 rounded-2xl p-6" x-data="{ sizes: [{ size: '', stock: 0 }] }">
+        <div class="bg-white border border-gray-100 rounded-2xl p-6" x-data="{ sizes: [{ size: '', stock: 0, price: '' }] }">
             <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
                 <h2 class="font-bold text-gray-900 text-sm">O'lchamlar va zaxira</h2>
-                <button type="button" @click="sizes.push({ size: '', stock: 0 })"
+                <button type="button" @click="sizes.push({ size: '', stock: 0, price: '' })"
                     class="flex items-center gap-1 text-xs font-semibold text-violet-600 hover:underline">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                     Qo'shish
                 </button>
             </div>
-            <div class="space-y-3">
+            {{-- Header labels --}}
+            <div class="flex items-center gap-3 mb-2 px-1">
+                <span class="w-28 text-xs font-semibold text-gray-400 uppercase tracking-wider">O'lcham</span>
+                <span class="w-24 text-xs font-semibold text-gray-400 uppercase tracking-wider">Zaxira</span>
+                <span class="flex-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Narx (so'm) <span class="text-gray-300 font-normal normal-case">ixtiyoriy</span></span>
+            </div>
+            <div class="space-y-2.5">
                 <template x-for="(s, i) in sizes" :key="i">
                     <div class="flex items-center gap-3">
                         <input type="text" :name="`sizes[${i}][size]`" x-model="s.size" placeholder="EU 40"
-                            class="w-28 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
-                        <input type="number" :name="`sizes[${i}][stock]`" x-model="s.stock" min="0" placeholder="Zaxira"
-                            class="w-24 px-3 py-2 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+                            class="w-28 px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+                        <input type="number" :name="`sizes[${i}][stock]`" x-model="s.stock" min="0" placeholder="0"
+                            class="w-24 px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-gray-900">
+                        <input type="number" :name="`sizes[${i}][price]`" x-model="s.price" min="0" step="1000" placeholder="Asosiy narx"
+                            class="flex-1 px-3 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 bg-violet-50 placeholder-gray-400">
                         <button type="button" @click="sizes.splice(i, 1)" x-show="sizes.length > 1"
-                            class="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors">
+                            class="p-1.5 text-gray-400 hover:text-red-500 rounded-lg transition-colors shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                         </button>
                     </div>
                 </template>
             </div>
+            <p class="mt-3 text-xs text-gray-400">💡 Narx bo'sh qoldirilsa, asosiy mahsulot narxi ishlatiladi.</p>
         </div>
 
         <div class="flex items-center gap-3">

@@ -21,11 +21,9 @@ class Cart extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function getTotalAttribute()
+    public function getTotalAttribute(): float
     {
-        return $this->items->sum(function ($item) {
-            return $item->product->current_price * $item->quantity;
-        });
+        return (float) $this->items->sum(fn ($item) => $item->unit_price * $item->quantity);
     }
 
     public function getCountAttribute(): int

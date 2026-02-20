@@ -9,7 +9,19 @@ class ProductSize extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'size', 'stock'];
+    protected $fillable = ['product_id', 'size', 'stock', 'price'];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+    ];
+
+    /**
+     * Effective price: size-specific if set, otherwise null (use product price).
+     */
+    public function getEffectivePriceAttribute(): ?float
+    {
+        return $this->price ? (float) $this->price : null;
+    }
 
     public function product()
     {

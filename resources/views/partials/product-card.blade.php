@@ -26,13 +26,6 @@
                 <span class="bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-full">{{ __('app.badge_out_of_stock') }}</span>
             </div>
         @endif
-
-        {{-- Hover: Details button --}}
-        <div class="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <span class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3">
-                {{ __('app.details') }}
-            </span>
-        </div>
     </a>
 
     {{-- Info --}}
@@ -48,5 +41,9 @@
                 <span class="text-sm font-semibold text-gray-900">${{ number_format($product->price, 0) }}</span>
             @endif
         </div>
+        {{-- Details button --}}
+        <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 mt-3 hover:bg-gray-800 transition-colors">
+            {{ __('app.details') }}
+        </a>
     </div>
 </div>

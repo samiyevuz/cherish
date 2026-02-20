@@ -11,7 +11,16 @@
     <div class="w-full max-w-sm">
         <div class="text-center mb-8">
             <a href="{{ route('home') }}" class="inline-flex items-center justify-center">
-                <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-12 w-auto">
+                @if(file_exists(public_path('images/logo.png')))
+                    <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                        <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                    </span>
+                @else
+                    <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                        <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                    </span>
+                @endif
             </a>
         </div>
 

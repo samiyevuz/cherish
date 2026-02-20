@@ -32,50 +32,6 @@
     </div>
 </section>
 
-{{-- Featured Products --}}
-@if($featuredProducts->count())
-<section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h2 class="text-xl font-semibold text-gray-900">{{ __('app.home_featured') }}</h2>
-            <a href="{{ route('category.men') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors flex items-center gap-1">
-                {{ __('app.home_view_all') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($featuredProducts as $product)
-                @include('partials.product-card', ['product' => $product])
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
-{{-- New Arrivals --}}
-@if($newProducts->count())
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h2 class="text-xl font-semibold text-gray-900">{{ __('app.home_new_arrivals') }}</h2>
-            <a href="{{ route('category.new') }}" class="text-sm text-gray-500 hover:text-gray-900 transition-colors flex items-center gap-1">
-                {{ __('app.home_view_all') }}
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($newProducts as $product)
-                @include('partials.product-card', ['product' => $product])
-            @endforeach
-        </div>
-    </div>
-</section>
-@endif
-
 {{-- Categories Banner --}}
 <section class="py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,5 +51,27 @@
         </div>
     </div>
 </section>
+
+{{-- Recommended Products (Tavsiya etilgan) --}}
+@if($featuredProducts->count())
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-10">
+            <h2 class="text-xl font-semibold text-gray-900">{{ __('app.home_featured') }}</h2>
+            <a href="{{ route('category.men') }}" class="text-sm text-gray-900 hover:text-gray-700 transition-colors flex items-center gap-1">
+                {{ __('app.home_view_all') }}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($featuredProducts->take(4) as $product)
+                @include('partials.product-card', ['product' => $product])
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 
 @endsection

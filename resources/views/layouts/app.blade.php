@@ -19,7 +19,16 @@
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center shrink-0">
-                    <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-9 w-auto">
+                    @if(file_exists(public_path('images/logo.png')))
+                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-9 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="text-2xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        </span>
+                    @else
+                        <span class="text-2xl font-black tracking-tight text-gray-900 leading-none">
+                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        </span>
+                    @endif
                 </a>
 
                 {{-- Desktop Navigation --}}
@@ -165,7 +174,16 @@
                 {{-- Brand --}}
                 <div>
                 <a href="{{ route('home') }}" class="inline-flex items-center mb-4">
-                    <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto">
+                    @if(file_exists(public_path('images/logo.png')))
+                        <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-10 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        </span>
+                    @else
+                        <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
+                            <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                        </span>
+                    @endif
                 </a>
                     <p class="text-sm text-gray-500 mt-2">{{ __('app.footer_tagline') }}</p>
                 </div>

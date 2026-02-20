@@ -47,6 +47,7 @@ class CheckoutController extends Controller
                 'phone'          => $request->phone,
                 'city'           => $request->city,
                 'address'        => $request->address,
+                'payment_method' => $request->payment_method,
                 'status'         => 'accepted',
             ]);
 

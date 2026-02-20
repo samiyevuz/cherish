@@ -32,26 +32,6 @@
     </div>
 </section>
 
-{{-- Categories Banner --}}
-<section class="py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <a href="{{ route('category.men') }}" class="group relative overflow-hidden bg-gray-900 h-56 flex items-center justify-center">
-                <img src="https://picsum.photos/seed/men-cat/700/400"
-                     alt="{{ __('app.home_men_cat') }}"
-                     class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500">
-                <span class="relative z-10 text-white text-2xl font-medium tracking-wide">{{ __('app.home_men_cat') }}</span>
-            </a>
-            <a href="{{ route('category.women') }}" class="group relative overflow-hidden bg-gray-800 h-56 flex items-center justify-center">
-                <img src="https://picsum.photos/seed/women-cat/700/400"
-                     alt="{{ __('app.home_women_cat') }}"
-                     class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500">
-                <span class="relative z-10 text-white text-2xl font-medium tracking-wide">{{ __('app.home_women_cat') }}</span>
-            </a>
-        </div>
-    </div>
-</section>
-
 {{-- Recommended Products (Tavsiya etilgan) --}}
 @if($featuredProducts->count())
 <section class="py-16 bg-white">
@@ -73,5 +53,25 @@
     </div>
 </section>
 @endif
+
+{{-- Categories Banner --}}
+<section class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a href="{{ route('category.men') }}" class="group relative overflow-hidden bg-gray-900 h-56 flex items-center justify-center">
+                <img src="https://picsum.photos/seed/men-cat/700/400"
+                     alt="{{ __('app.home_men_cat') }}"
+                     class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500">
+                <span class="relative z-10 text-white text-2xl font-medium tracking-wide">{{ __('app.home_men_cat') }}</span>
+            </a>
+            <a href="{{ route('category.women') }}" class="group relative overflow-hidden bg-gray-800 h-56 flex items-center justify-center">
+                <img src="https://picsum.photos/seed/women-cat/700/400"
+                     alt="{{ __('app.home_women_cat') }}"
+                     class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500">
+                <span class="relative z-10 text-white text-2xl font-medium tracking-wide">{{ __('app.home_women_cat') }}</span>
+            </a>
+        </div>
+    </div>
+</section>
 
 @endsection

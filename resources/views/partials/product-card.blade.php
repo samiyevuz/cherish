@@ -1,3 +1,6 @@
+@php
+    $showButtonAlways = $showButtonAlways ?? false;
+@endphp
 <div class="group relative">
     {{-- Image --}}
     <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden bg-gray-100 aspect-square">
@@ -27,12 +30,14 @@
             </div>
         @endif
 
-        {{-- Hover: Details button --}}
-        <div class="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-            <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 hover:bg-gray-800 transition-colors">
-                {{ __('app.details') }}
-            </a>
-        </div>
+        {{-- Hover: Details button (only for homepage) --}}
+        @if(!$showButtonAlways)
+            <div class="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 hover:bg-gray-800 transition-colors">
+                    {{ __('app.details') }}
+                </a>
+            </div>
+        @endif
     </a>
 
     {{-- Info --}}
@@ -48,5 +53,11 @@
                 <span class="text-sm font-semibold text-gray-900">${{ number_format($product->price, 0) }}</span>
             @endif
         </div>
+        {{-- Details button (always visible for category pages) --}}
+        @if($showButtonAlways)
+            <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 mt-3 hover:bg-gray-800 transition-colors">
+                {{ __('app.details') }}
+            </a>
+        @endif
     </div>
 </div>

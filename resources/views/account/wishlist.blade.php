@@ -8,7 +8,7 @@
     @if($wishlists->count())
         <div class="grid grid-cols-2 gap-4">
             @foreach($wishlists as $wishlist)
-                @include('partials.product-card', ['product' => $wishlist->product])
+                @include('partials.product-card', ['product' => $wishlist->product, 'showButtonAlways' => true])
             @endforeach
         </div>
         {{ $wishlists->links('partials.pagination') }}

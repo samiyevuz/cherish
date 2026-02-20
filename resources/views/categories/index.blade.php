@@ -42,7 +42,7 @@
     @if($products->count())
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             @foreach($products as $product)
-                @include('partials.product-card', ['product' => $product])
+                @include('partials.product-card', ['product' => $product, 'showButtonAlways' => true])
             @endforeach
         </div>
 

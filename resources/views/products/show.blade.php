@@ -202,7 +202,7 @@
         <h2 class="text-xl font-bold text-gray-900 mb-6">{{ __('app.product_related') }}</h2>
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             @foreach($related as $product)
-                @include('partials.product-card', ['product' => $product, 'showButtonAlways' => true])
+                @include('partials.product-card', ['product' => $product])
             @endforeach
         </div>
     </div>

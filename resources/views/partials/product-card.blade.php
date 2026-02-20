@@ -32,8 +32,8 @@
 
         {{-- Hover: Details button (only for homepage) --}}
         @if(!$showButtonAlways)
-            <div class="absolute bottom-0 left-0 right-0 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-10">
-                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-800 transition-colors">
+            <div class="absolute bottom-0 left-0 right-0 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-30 pointer-events-none group-hover:pointer-events-auto">
+                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-800 transition-colors pointer-events-auto">
                     {{ __('app.details') }}
                 </a>
             </div>

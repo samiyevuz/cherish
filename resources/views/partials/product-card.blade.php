@@ -1,13 +1,13 @@
 @php
     $showButtonAlways = $showButtonAlways ?? false;
 @endphp
-<div class="group relative transition-transform duration-300 ease-out group-hover:scale-[1.02]">
-    {{-- Image --}}
+<div class="group relative bg-white rounded-xl overflow-hidden transition-all duration-500 ease-out hover:-translate-y-2 shadow-md hover:shadow-xl">
+    {{-- Image Container --}}
     <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden bg-gray-100 aspect-square">
         <img
             src="{{ $product->primary_image_url }}"
             alt="{{ $product->name }}"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
             loading="lazy"
         >
 
@@ -32,8 +32,8 @@
 
         {{-- Hover: Details button (only for homepage) --}}
         @if(!$showButtonAlways)
-            <div class="absolute bottom-0 left-0 right-0 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-out z-10">
-                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 hover:bg-gray-800 transition-colors">
+            <div class="absolute bottom-0 left-0 right-0 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-10">
+                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-800 transition-colors">
                     {{ __('app.details') }}
                 </a>
             </div>
@@ -41,7 +41,7 @@
     </a>
 
     {{-- Info --}}
-    <div class="pt-3">
+    <div class="pt-3 px-1">
         <a href="{{ route('product.show', $product->slug) }}" class="block">
             <h3 class="text-sm text-blue-600 hover:text-blue-800 transition-colors leading-snug line-clamp-2">{{ $product->name }}</h3>
         </a>
@@ -55,7 +55,7 @@
         </div>
         {{-- Details button (always visible for category pages) --}}
         @if($showButtonAlways)
-            <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-medium text-center py-3 mt-3 hover:bg-gray-800 transition-colors">
+            <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 mt-3 hover:bg-gray-800 transition-colors">
                 {{ __('app.details') }}
             </a>
         @endif

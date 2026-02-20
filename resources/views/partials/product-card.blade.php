@@ -1,7 +1,7 @@
 @php
     $showButtonAlways = $showButtonAlways ?? false;
 @endphp
-<div class="group relative bg-white transition-all duration-300 ease-out hover:-translate-y-1 shadow-sm hover:shadow-lg">
+<div class="group relative bg-white transition-all duration-300 ease-out hover:-translate-y-1">
 
     {{-- Image Container --}}
     <div class="relative overflow-hidden bg-gray-100 aspect-square">

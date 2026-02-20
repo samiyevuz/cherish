@@ -33,28 +33,28 @@
 
                 {{-- Desktop Navigation --}}
                 <nav class="hidden lg:flex items-center gap-8">
-                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-800 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_home') }}</a>
-                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_men') }}</a>
-                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_women') }}</a>
-                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold text-gray-900' : '' }}">{{ __('app.nav_new') }}</a>
+                    <a href="{{ route('home') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('home') ? 'font-semibold' : '' }}">{{ __('app.nav_home') }}</a>
+                    <a href="{{ route('category.men') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.men') ? 'font-semibold' : '' }}">{{ __('app.nav_men') }}</a>
+                    <a href="{{ route('category.women') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.women') ? 'font-semibold' : '' }}">{{ __('app.nav_women') }}</a>
+                    <a href="{{ route('category.new') }}" class="text-sm font-medium text-gray-900 hover:text-gray-900 transition-colors {{ request()->routeIs('category.new') ? 'font-semibold' : '' }}">{{ __('app.nav_new') }}</a>
                     <a href="{{ route('category.sale') }}" class="text-sm font-medium text-red-500 hover:text-red-600 transition-colors {{ request()->routeIs('category.sale') ? 'font-semibold' : '' }}">{{ __('app.nav_sale') }}</a>
                 </nav>
 
                 {{-- Right side --}}
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-4">
 
                     {{-- Language Switcher --}}
                     @php $currentLocale = app()->getLocale(); @endphp
-                    <div class="hidden lg:flex items-center gap-2">
+                    <div class="hidden lg:flex items-center gap-2 bg-gray-100 rounded-lg px-2 py-1">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                         <a href="{{ route('locale.switch', 'uz') }}"
-                           class="text-xs font-bold px-2 py-0.5 rounded transition-colors {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900' }}">UZ</a>
+                           class="text-xs font-bold px-2.5 py-1 rounded-full transition-colors {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-900' }}">UZ</a>
                         <a href="{{ route('locale.switch', 'ru') }}"
-                           class="text-sm transition-colors {{ $currentLocale === 'ru' ? 'font-bold text-gray-900' : 'text-gray-400 hover:text-gray-700' }}">RU</a>
+                           class="text-sm transition-colors {{ $currentLocale === 'ru' ? 'font-bold text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">RU</a>
                         <a href="{{ route('locale.switch', 'en') }}"
-                           class="text-sm transition-colors {{ $currentLocale === 'en' ? 'font-bold text-gray-900' : 'text-gray-400 hover:text-gray-700' }}">EN</a>
+                           class="text-sm transition-colors {{ $currentLocale === 'en' ? 'font-bold text-gray-900' : 'text-gray-500 hover:text-gray-900' }}">EN</a>
                     </div>
 
                     {{-- Cart --}}

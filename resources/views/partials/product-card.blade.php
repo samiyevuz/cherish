@@ -1,7 +1,7 @@
 @php
     $showButtonAlways = $showButtonAlways ?? false;
 @endphp
-<div class="group relative bg-white rounded-xl overflow-hidden transition-all duration-500 ease-out hover:-translate-y-2 shadow-md hover:shadow-xl">
+<div class="group relative bg-white overflow-hidden transition-all duration-500 ease-out hover:-translate-y-2 shadow-md hover:shadow-xl">
     {{-- Image Container --}}
     <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden bg-gray-100 aspect-square">
         <img

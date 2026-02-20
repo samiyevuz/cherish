@@ -3,13 +3,15 @@
 @endphp
 <div class="group relative bg-white overflow-hidden transition-all duration-500 ease-out hover:-translate-y-2 shadow-md hover:shadow-xl">
     {{-- Image Container --}}
-    <a href="{{ route('product.show', $product->slug) }}" class="block relative overflow-hidden bg-gray-100 aspect-square">
-        <img
-            src="{{ $product->primary_image_url }}"
-            alt="{{ $product->name }}"
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-            loading="lazy"
-        >
+    <div class="relative overflow-hidden bg-gray-100 aspect-square">
+        <a href="{{ route('product.show', $product->slug) }}" class="block w-full h-full">
+            <img
+                src="{{ $product->primary_image_url }}"
+                alt="{{ $product->name }}"
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                loading="lazy"
+            >
+        </a>
 
         {{-- Badges --}}
         <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
@@ -32,13 +34,13 @@
 
         {{-- Hover: Details button (only for homepage) --}}
         @if(!$showButtonAlways)
-            <div class="absolute bottom-0 left-0 right-0 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-30 pointer-events-none group-hover:pointer-events-auto">
-                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-800 transition-colors pointer-events-auto">
+            <div class="absolute bottom-0 left-0 right-0 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-30">
+                <a href="{{ route('product.show', $product->slug) }}" class="block w-full bg-gray-900 text-white text-sm font-semibold text-center py-3 hover:bg-gray-800 transition-colors">
                     {{ __('app.details') }}
                 </a>
             </div>
         @endif
-    </a>
+    </div>
 
     {{-- Info --}}
     <div class="pt-3 px-1">

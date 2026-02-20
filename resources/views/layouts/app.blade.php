@@ -19,7 +19,7 @@
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center shrink-0">
-                    @if(file_exists(public_path('images/logo.png')))
+                    @if(file_exists(public_path('images/logo.jpg')))
                         <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                         <span class="text-4xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
                             <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>

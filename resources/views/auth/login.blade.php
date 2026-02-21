@@ -6,6 +6,9 @@
     <title>{{ __('app.auth_login') }} — CherishStyle</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
 <body class="bg-gray-50 font-inter min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-sm">
@@ -50,37 +53,36 @@
                 {{-- Login field: phone or email --}}
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 mb-1.5 uppercase tracking-wider">
-                        Telefon yoki Email
+                        Kirish usuli
                     </label>
 
-                    {{-- Toggle buttons --}}
-                    <div class="flex rounded-xl border border-gray-200 overflow-hidden mb-2 text-xs font-semibold">
+                    {{-- Toggle buttons (rasmdagidek) --}}
+                    <div class="flex rounded-xl border border-gray-200 overflow-hidden mb-3 bg-gray-50 p-1">
                         <button type="button"
                             @click="mode = 'phone'"
-                            :class="mode === 'phone' ? 'bg-gray-900 text-white' : 'bg-white text-gray-500 hover:bg-gray-50'"
-                            class="flex-1 py-2 transition-all flex items-center justify-center gap-1.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            :class="mode === 'phone' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                            class="flex-1 py-2.5 px-4 text-sm font-semibold transition-all rounded-lg flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                             Telefon
                         </button>
                         <button type="button"
                             @click="mode = 'email'"
-                            :class="mode === 'email' ? 'bg-gray-900 text-white' : 'bg-white text-gray-500 hover:bg-gray-50'"
-                            class="flex-1 py-2 transition-all flex items-center justify-center gap-1.5">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            :class="mode === 'email' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'"
+                            class="flex-1 py-2.5 px-4 text-sm font-semibold transition-all rounded-lg flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             Email
                         </button>
                     </div>
 
-                    {{-- Phone input with +998 prefix --}}
+                    {{-- Phone input with uz +998 prefix (rasmdagidek) --}}
                     <div x-show="mode === 'phone'" x-cloak>
                         <div class="flex items-stretch rounded-xl overflow-hidden border @error('login') border-red-400 bg-red-50 @else border-gray-200 @enderror focus-within:ring-2 focus-within:ring-gray-900 focus-within:border-transparent">
-                            <div class="flex items-center gap-1.5 pl-3.5 pr-2 bg-gray-50 border-r border-gray-200 shrink-0">
-                                <span class="text-sm font-bold">🇺🇿</span>
-                                <span class="text-sm font-semibold text-gray-700">+998</span>
+                            <div class="flex items-center gap-2 px-4 py-3 bg-gray-50 border-r border-gray-200 shrink-0">
+                                <span class="text-sm font-semibold text-gray-600">uz</span>
+                                <span class="text-sm font-bold text-gray-900">+998</span>
                             </div>
                             <input
                                 type="tel"
-                                x-show="mode === 'phone'"
                                 x-model="phoneDigits"
                                 @input="formatPhone"
                                 @keydown="allowOnlyDigits"
@@ -88,7 +90,7 @@
                                 placeholder="90 123 45 67"
                                 maxlength="12"
                                 autofocus
-                                class="flex-1 px-3 py-3 text-sm bg-white focus:outline-none text-gray-900 placeholder-gray-400 @error('login') bg-red-50 @enderror"
+                                class="flex-1 px-4 py-3 text-sm bg-white focus:outline-none text-gray-900 placeholder-gray-400 @error('login') bg-red-50 @enderror"
                                 value="{{ old('login') && !str_contains(old('login'), '@') ? ltrim(preg_replace('/^\+?998/', '', preg_replace('/\D/', '', old('login')))) : '' }}">
                         </div>
                     </div>
@@ -97,7 +99,6 @@
                     <div x-show="mode === 'email'" x-cloak>
                         <input
                             type="email"
-                            x-show="mode === 'email'"
                             :name="mode === 'email' ? 'login' : ''"
                             placeholder="example@mail.com"
                             value="{{ old('login') && str_contains(old('login'), '@') ? old('login') : '' }}"

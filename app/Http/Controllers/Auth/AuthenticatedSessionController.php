@@ -20,39 +20,29 @@ class AuthenticatedSessionController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'login'    => ['required', 'string'],
+            'phone'    => ['required', 'string'],
             'password' => ['required'],
         ], [
-            'login.required'    => 'Email yoki telefon raqam majburiy.',
+            'phone.required'    => 'Telefon raqam majburiy.',
             'password.required' => 'Parol majburiy.',
         ]);
 
-        $login    = trim($request->login);
-        $password = $request->password;
-        $remember = $request->boolean('remember');
-
-        $user = null;
-
-        if (str_contains($login, '@')) {
-            // Email login
-            $user = User::where('email', $login)->first();
-        } else {
-            // Phone login — normalize to +998XXXXXXXXX
-            $digits = preg_replace('/\D/', '', $login);
-            if (str_starts_with($digits, '998')) {
-                $digits = substr($digits, 3);
-            }
-            $phone = '+998' . $digits;
-            $user  = User::where('phone', $phone)->first();
+        // Normalize phone to +998XXXXXXXXX
+        $digits = preg_replace('/\D/', '', $request->phone);
+        if (str_starts_with($digits, '998')) {
+            $digits = substr($digits, 3);
         }
+        $phone = '+998' . $digits;
 
-        if (!$user || !Hash::check($password, $user->password)) {
+        $user = User::where('phone', $phone)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return back()
-                ->withErrors(['login' => 'Email/telefon yoki parol noto\'g\'ri.'])
-                ->onlyInput('login');
+                ->withErrors(['phone' => 'Telefon raqam yoki parol noto\'g\'ri.'])
+                ->onlyInput('phone');
         }
 
-        Auth::login($user, $remember);
+        Auth::login($user, $request->boolean('remember'));
         $request->session()->regenerate();
 
         if ($user->isAdmin()) {

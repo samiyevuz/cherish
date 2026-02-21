@@ -9,12 +9,19 @@
 </head>
 <body class="bg-gray-50 font-inter min-h-screen flex items-center justify-center px-4">
     <div class="w-full max-w-sm">
+        {{-- Logo (navbar'dagidek) --}}
         <div class="text-center mb-8">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-2">
-                <div class="w-10 h-10 bg-gray-900 rounded-xl flex items-center justify-center">
-                    <span class="text-white font-black">CS</span>
-                </div>
-                <span class="font-black text-xl text-gray-900">CherishStyle</span>
+            <a href="{{ route('home') }}" class="inline-flex items-center justify-center">
+                @if(file_exists(public_path('images/logo.svg')))
+                    <img src="{{ asset('images/logo.svg') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="text-4xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                        <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
+                    </span>
+                @else
+                    <span class="text-4xl font-black tracking-tight text-gray-900 leading-none">
+                        <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
+                    </span>
+                @endif
             </a>
         </div>
 

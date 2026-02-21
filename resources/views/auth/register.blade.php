@@ -12,27 +12,38 @@
 </head>
 <body class="bg-gray-50 font-inter min-h-screen flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-sm">
+        {{-- Logo (navbar'dagidek) --}}
         <div class="text-center mb-8">
             <a href="{{ route('home') }}" class="inline-flex items-center justify-center">
-                @if(file_exists(public_path('images/logo.png')))
-                    <img src="{{ asset('images/logo.png') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <span class="text-3xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
-                        <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                @if(file_exists(public_path('images/logo.svg')))
+                    <img src="{{ asset('images/logo.svg') }}" alt="CTS" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="text-4xl font-black tracking-tight text-gray-900 leading-none" style="display:none;">
+                        <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                     </span>
                 @else
-                    <span class="text-3xl font-black tracking-tight text-gray-900 leading-none">
-                        <span style="font-style:italic;letter-spacing:-2px;opacity:0.55">C</span><span style="letter-spacing:-1px">TS</span>
+                    <span class="text-4xl font-black tracking-tight text-gray-900 leading-none">
+                        <span style="font-style:italic;letter-spacing:-3px;opacity:0.45">C</span><span style="letter-spacing:-1px">TS</span>
                     </span>
                 @endif
             </a>
         </div>
 
-        {{-- Language switcher --}}
+        {{-- Language switcher (navbar'dagidek) --}}
         @php $currentLocale = app()->getLocale(); @endphp
-        <div class="flex justify-center gap-3 mb-6">
-            <a href="{{ route('locale.switch', 'uz') }}" class="text-sm font-semibold {{ $currentLocale === 'uz' ? 'text-gray-900 underline' : 'text-gray-400 hover:text-gray-700' }}">UZ</a>
-            <a href="{{ route('locale.switch', 'ru') }}" class="text-sm font-semibold {{ $currentLocale === 'ru' ? 'text-gray-900 underline' : 'text-gray-400 hover:text-gray-700' }}">RU</a>
-            <a href="{{ route('locale.switch', 'en') }}" class="text-sm font-semibold {{ $currentLocale === 'en' ? 'text-gray-900 underline' : 'text-gray-400 hover:text-gray-700' }}">EN</a>
+        <div class="flex justify-center mb-6">
+            <div class="flex items-center gap-1.5 border border-gray-200 rounded-2xl px-3 py-1.5">
+                {{-- Globe icon --}}
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-[17px] w-[17px] text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/>
+                </svg>
+                <a href="{{ route('locale.switch', 'uz') }}"
+                   class="text-xs font-bold px-2.5 py-0.5 rounded-full transition-all {{ $currentLocale === 'uz' ? 'bg-gray-900 text-white' : 'text-gray-500 hover:text-gray-800' }}">UZ</a>
+                <a href="{{ route('locale.switch', 'ru') }}"
+                   class="text-xs font-medium transition-all {{ $currentLocale === 'ru' ? 'bg-gray-900 text-white px-2.5 py-0.5 rounded-full' : 'text-gray-500 hover:text-gray-800 px-1' }}">RU</a>
+                <a href="{{ route('locale.switch', 'en') }}"
+                   class="text-xs font-medium transition-all {{ $currentLocale === 'en' ? 'bg-gray-900 text-white px-2.5 py-0.5 rounded-full' : 'text-gray-500 hover:text-gray-800 px-1' }}">EN</a>
+            </div>
         </div>
 
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
